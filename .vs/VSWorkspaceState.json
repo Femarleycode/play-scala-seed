@@ -1,16 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.g8\\form",
-    "\\.g8\\form\\app",
-    "\\.g8\\form\\app\\controllers",
-    "\\.g8\\form\\app\\views",
     "\\app",
     "\\app\\controllers",
-    "\\app\\views",
-    "\\test",
-    "\\_"
+    "\\project\\project",
+    "\\sbt-dist\\conf"
   ],
-  "SelectedNode": "\\test\\controllers\\HomeControllerSpec.scala",
   "PreviewInSolutionExplorer": false
 }
