@@ -13,8 +13,8 @@ class ApplicationControllerSpec extends UnitSpec with GuiceOneAppPerSuite{
     )
   "ApplicationController .index()" should {
   val result = TestApplicationController.index()(FakeRequest())
-    "return TODO" in{
-      status(result) shouldBe Status.NOT_IMPLEMENTED
+    "return OK" in{
+      status(result) shouldBe Status.OK
     }
   }
 
