@@ -10,9 +10,9 @@ class ApplicationController @Inject()(val controllerComponents: ControllerCompon
 
   def create() = TODO
 
-  def read() = TODO
+  def read(id: String) = TODO
 
-  def update() = TODO
+  def update(id: String) = TODO
 
-  def delete() = TODO
+  def delete(id: String) = TODO
 }
