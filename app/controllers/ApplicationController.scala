@@ -1,14 +1,19 @@
 package controllers
 
-import play.api.mvc.{AnyContent, BaseController, ControllerComponents, Request}
+import play.api.libs.json.Json
+import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents, Request}
+import repositories.DataRepository
 
 import javax.inject.Inject
+import scala.concurrent.ExecutionContext
 
 
-class ApplicationController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
+class ApplicationController @Inject()(val controllerComponents: ControllerComponents,
+                                      dataRepository: DataRepository,
+                                      implicit val ec: ExecutionContext) extends BaseController {
 
-  def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+  def index(): Action[AnyContent] = Action.async { implicit request =>
+    dataRepository.find().map (items => Ok(Json.toJson(items)))
   }
 
   def create() = TODO

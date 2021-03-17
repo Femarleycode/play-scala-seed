@@ -1,7 +1,6 @@
 package repositories
 
 import models.DataModel
-import play.api.data.Forms.date
 import play.api.libs.json.{JsObject, Json}
 import play.modules.reactivemongo.ReactiveMongoComponent
 import reactivemongo.api.commands.WriteResult
@@ -20,7 +19,7 @@ class DataRepository @Inject()(mongo: ReactiveMongoComponent,
 ){
   def create(data: DataModel): Future[WriteResult] = insert(data)
 
-  def read(id: String): Future[DataModel] = find("_ind" -> id) map (_.head_)
+  def read(id: String): Future[DataModel] = find("_id" -> id) map (_.head)
 
   def update(data: DataModel): Future[DataModel] = findAndUpdate(
     Json.obj("_id" -> data._id),

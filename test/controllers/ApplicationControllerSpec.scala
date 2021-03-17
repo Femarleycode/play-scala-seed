@@ -1,15 +1,24 @@
 package controllers
 
+import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.test.UnitSpec
 import play.api.test.FakeRequest
 import play.api.http.Status
+import repositories.DataRepository
 
-class ApplicationControllerSpec extends UnitSpec with GuiceOneAppPerSuite{
+import scala.concurrent.ExecutionContext
+
+class ApplicationControllerSpec extends UnitSpec with GuiceOneAppPerSuite with MockitoSugar{
   val controllerComponents: ControllerComponents = app.injector.instanceOf[ControllerComponents]
+  implicit val ec: ExecutionContext = app.injector.instanceOf[ExecutionContext]
+  val mockDataRepository: DataRepository = mock[DataRepository]
+
     object TestApplicationController extends ApplicationController(
-      controllerComponents
+      controllerComponents,
+      mockDataRepository,
+      ec
     )
   "ApplicationController .index()" should {
   val result = TestApplicationController.index()(FakeRequest())
