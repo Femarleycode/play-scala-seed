@@ -1,11 +1,13 @@
 package controllers
 
-import play.api.libs.json.Json
+import models.DataModel
+import play.api.libs.json.{JsError, JsSuccess, JsValue, Json}
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents, Request}
+import reactivemongo.core.errors.DatabaseException
 import repositories.DataRepository
 
 import javax.inject.Inject
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 
 class ApplicationController @Inject()(val controllerComponents: ControllerComponents,
@@ -13,14 +15,34 @@ class ApplicationController @Inject()(val controllerComponents: ControllerCompon
                                       implicit val ec: ExecutionContext) extends BaseController {
 
   def index(): Action[AnyContent] = Action.async { implicit request =>
-    dataRepository.find().map (items => Ok(Json.toJson(items)))
+    dataRepository.find().map(items => Ok(Json.toJson(items)))
   }
 
-  def create() = TODO
+  def create(): Action[JsValue] = Action.async(parse.json) { implicit request =>
+    request.body.validate[DataModel] match {
+      case JsSuccess(dataModel, _) =>
+        dataRepository.create(dataModel).map(_ => Created) recover {
+          case _: DatabaseException => InternalServerError(Json.obj(
+            "message" -> "Error adding time to mongo"
+          ))
+        }
+      case JsError(_) => Future(BadRequest)
+    }
+  }
 
-  def read(id: String) = TODO
+  def read(id: String): Action[AnyContent] = Action.async { implicit request =>
+    dataRepository.read(id).map(items => Ok(Json.toJson(items)))
+  }
 
-  def update(id: String) = TODO
+  def update(id: String): Action[JsValue] = Action.async(parse.json) { implicit request =>
+    request.body.validate[DataModel] match {
+      case JsSuccess(dataModel, _) =>
+        dataRepository.update(dataModel).map(result => Accepted(Json.toJson(result)))
+      case JsError(_) => Future(BadRequest)
+    }
+  }
 
-  def delete(id: String) = TODO
-}
+    def delete(id: String): Action[AnyContent] = Action.async { implicit request =>
+      dataRepository.delete(id).map(_ => Accepted)
+    }
+  }

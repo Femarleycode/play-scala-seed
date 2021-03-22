@@ -30,28 +30,28 @@ class ApplicationControllerSpec extends UnitSpec with GuiceOneAppPerSuite with M
   "ApplicationController .create()" should {
     val result = TestApplicationController.index()(FakeRequest())
     "return TODO" in{
-      status(result) shouldBe Status.NOT_IMPLEMENTED
+      status(result) shouldBe Status.OK
     }
   }
 
   "ApplicationController .read()" should {
     val result = TestApplicationController.index()(FakeRequest())
     "return TODO" in{
-      status(result) shouldBe Status.NOT_IMPLEMENTED
+      status(result) shouldBe Status.OK
     }
   }
 
   "ApplicationController .update()" should {
     val result = TestApplicationController.index()(FakeRequest())
     "return TODO" in{
-      status(result) shouldBe Status.NOT_IMPLEMENTED
+      status(result) shouldBe Status.OK
     }
   }
 
   "ApplicationController .delete()" should {
     val result = TestApplicationController.index()(FakeRequest())
     "return TODO" in{
-      status(result) shouldBe Status.NOT_IMPLEMENTED
+      status(result) shouldBe Status.OK
     }
   }
 
