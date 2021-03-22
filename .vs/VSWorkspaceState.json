@@ -1,17 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.g8",
-    "\\.g8\\form",
-    "\\.g8\\form\\app",
-    "\\.g8\\form\\app\\views",
-    "\\.g8\\form\\app\\views\\$model__camel$",
-    "\\.g8\\form\\test",
-    "\\.g8\\form\\test\\controllers",
-    "\\test",
-    "\\test\\controllers",
-    "\\_"
+    "\\app",
+    "\\app\\controllers"
   ],
-  "SelectedNode": "\\app\\controllers\\HomeController.scala",
   "PreviewInSolutionExplorer": false
 }
