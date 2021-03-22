@@ -50,3 +50,5 @@ build
 
 #general
 *.class
+
+.vs
